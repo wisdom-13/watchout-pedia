@@ -1,8 +1,9 @@
 import React from "react";
+import Hearder from "../components/Hearder";
 
 const MainPage: React.FC = () => {
   return (
-    <div>mainpage</div>
+    <Hearder />
   )
 }
 
