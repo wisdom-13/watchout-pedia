@@ -84,9 +84,9 @@ const Footer: React.FC = () => {
       <Section>
         <Statistics>
           <Summary>
-            지금까지&nbps;
+            지금까지
             <Emphasis>* 664,433,424 개의 평가가</Emphasis>
-            &nbps;쌓였어요.
+            쌓였어요.
           </Summary>
         </Statistics>
         <Container>
