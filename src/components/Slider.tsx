@@ -4,6 +4,9 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 interface Props {
   settings?: Settings;
   children?: ReactNode | ReactNode[];
