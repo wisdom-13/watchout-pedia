@@ -2,12 +2,12 @@ import styled from "@emotion/styled";
 import React from "react";
 import Footer from "../components/Footer";
 import Hearder from "../components/Hearder";
-// import TestSlider from "../components/TestSlider";
 import LatestMovieSection from "../features/movie/latest";
 import NowPlayingMovieSection from "../features/movie/nowPlaying";
 import PopularMovieSection from "../features/movie/popular";
 import TopRateMovieSection from "../features/movie/topRate";
 import UpcomingMovieSection from "../features/movie/upcoming";
+import TopRateTvSection from "../features/tv/topRate";
 
 const Main = styled.main`
   width: 1200px;
