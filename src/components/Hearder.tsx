@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { AiOutlineSearch } from 'react-icons/ai'
+import useMovieSearch from "../features/movie/useMovieSearch";
 
 const Base = styled.header`
   position: fixed;
@@ -26,7 +27,6 @@ const MenuList = styled.ul`
   padding: 0;
   margin: 0;
   display: flex;
-  overflow: hidden;
 `;
 
 const Menu = styled.li`
@@ -41,7 +41,7 @@ const Menu = styled.li`
 
 const MenuButton = styled.button<{ active?: boolean }>`
   font-size: 15px;
-  color: ${({ active }) => active ? 'rgb(53, 53, 53' : 'rgb(126, 126, 126)'};
+  color: ${({ active }) => active ? 'rgb(53, 53, 53)' : 'rgb(126, 126, 126)'};
   cursor: pointer;
   border: none;
   background: none;
@@ -129,11 +129,53 @@ const SignUp = styled.button`
   margin: 15px 0;
 `;
 
+const SearchResultWrapper = styled.div`
+  position: absolute;
+  top: 60px;
+  left: 0;
+  z-index: 9999;
+  background: #fff;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+  max-height: 480px;
+  overflow-y: scroll;
+`;
+
+const SearchResultListItem = styled.li`
+  padding: 4px 6px;
+  box-sizing: border-box;
+  color: #222;
+  font-size: 14px;
+  width: 100%;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  &:hover {
+    background-color: #eee;
+  }
+`;
+
+const SearchResultList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`
+
 
 const Hearder: React.FC = () => {
-  const handleKeyword = () => {
+  const [searchKeyword, setSerchKeyword] = useState<string>('');
+  const pathname = window.location.pathname;
 
+  const handleKeyword = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setSerchKeyword(e.target.value);
   }
+
+  const { data: searchResult } = useMovieSearch(searchKeyword);
+  console.log(searchResult)
 
   return (
     <Base>
@@ -150,10 +192,10 @@ const Hearder: React.FC = () => {
             </Menu>
             <Menu>
               <Link href="/">
-                <MenuButton>영화</MenuButton>
+                <MenuButton active={pathname === '/'}>영화</MenuButton>
               </Link>
               <Link href="/tv">
-                <MenuButton>TV 프로그램</MenuButton>
+                <MenuButton active={pathname === '/tv'}>TV 프로그램</MenuButton>
               </Link>
             </Menu>
 
@@ -168,6 +210,17 @@ const Hearder: React.FC = () => {
                   </SearchForm>
                 </SearchFormWrapper>
               </SearchContainer>
+              <SearchResultWrapper>
+                <SearchResultList>
+                  {
+                    searchResult?.data.results.map(item => (
+                      <Link key={item.id} href={`/movie/${item.id}`}>
+                        <SearchResultListItem>{item.title}</SearchResultListItem>
+                      </Link>
+                    ))
+                  }
+                </SearchResultList>
+              </SearchResultWrapper>
             </SearchMenu>
             <Menu>
               <SignIn>로그인</SignIn>
