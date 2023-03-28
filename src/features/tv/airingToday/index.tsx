@@ -32,7 +32,7 @@ const AiringTodayTvSection: React.FC = () => {
               data.data.results.map(movie => (
                 <Card
                   key={movie.id}
-                  linkUrl={`/movie/${movie.id}`}
+                  linkUrl={`/tv/${movie.id}`}
                   title={movie.name}
                   posterPath={`${process.env.REACT_APP_IMAGE_PREFIX}/${movie.poster_path}`}
                   voteAverage={movie.vote_average}

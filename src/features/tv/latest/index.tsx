@@ -28,7 +28,7 @@ const LatestTvSection: React.FC = () => {
         ) : (
 
           <Card
-            linkUrl={`/movie/${data.data.id}`}
+            linkUrl={`/tv/${data.data.id}`}
             title={data.data.name}
             posterPath={`${process.env.REACT_APP_IMAGE_PREFIX}/${data.data.poster_path}`}
             voteAverage={data.data.vote_average}
